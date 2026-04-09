@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: fin-track-backend
+    runtime: java
+    env: static
+    
+    buildCommand: mvn clean install -DskipTests
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        sync: false # You will set the actual value in the Render UI
+      - key: SPRING_DATASOURCE_USERNAME
+        value: avnadmin
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: APP_CORS_ALLOWED_ORIGINS
+        value: https://fintrack-i.vercel.app/
+      - key: MAVEN_OPTS
+        value: "-Dstyle.color=never"
+      - key: TERM
+        value: "dumb"
